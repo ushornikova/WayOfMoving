@@ -6,18 +6,33 @@ using System.Threading.Tasks;
 
 namespace WayOfMoving
 {
-    interface IWayOfMoving
+    interface IPerson
     {
         void OnFood();
-        void ByCar();
-        void ByBycicle();
     }
     
+    interface IDriver
+    {
+        void ByCar();
+    }
 
-    class Person : IWayOfMoving
+    interface IBiker
+    {
+        void ByBycicle();
+    }
+
+    class Person : IPerson
     {
         public void OnFood() { Console.WriteLine("Hello, my name is Andrii and I am walking on food"); }
+    }
+
+    class Driver: IDriver
+    {
         public void ByCar() { Console.WriteLine("Hello, my name is Andrii and I am driving car"); }
+    }
+
+    class Biker: IBiker
+    {
         public void ByBycicle() { Console.WriteLine("Hello, my name is Andrii and I am driving a bike"); }
     }
 
@@ -25,14 +40,23 @@ namespace WayOfMoving
     {
         static void Main(string[] args)
         {
-            List<IWayOfMoving> personVar = new List<IWayOfMoving>();
-            personVar.Add(new Person());
-            foreach (IWayOfMoving p in personVar)
-            {
-                p.OnFood();
-                p.ByCar();
-                p.ByBycicle();
-            }
+            Person p = new Person();
+            ((Person)p).OnFood();
+
+            Driver d = new Driver();
+            ((Driver)d).ByCar();
+
+            Biker b = new Biker();
+            ((Biker)b).ByBycicle();
+
+            //List<IWayOfMoving> personVar = new List<IWayOfMoving>();
+            //personVar.Add(new Person());
+            //foreach (IWayOfMoving p in personVar)
+            //{
+            //    p.OnFood();
+            //    p.ByCar();
+            //    p.ByBycicle();
+            //}
             Console.ReadLine();
         }
     }
